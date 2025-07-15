@@ -4,7 +4,7 @@ CFLAGS = -Wall -Werror -Wextra -I./includes/
 RM = rm -f
 
 SRCS = srcs/main.c srcs/logic.c srcs/parsing.c srcs/utils.c srcs/ops/rotate.c \
-		srcs/ops/swap_push.c 
+		srcs/ops/swap_push.c srcs/ops/reverse_rotate.c
 
 OBJS = $(SRCS:.c=.o)
 
