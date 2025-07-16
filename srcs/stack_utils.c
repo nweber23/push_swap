@@ -1,12 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tester.c                                           :+:      :+:    :+:   */
+/*   stack_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nweber <nweber@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: nweber <nweber@student.42Heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/14 20:34:08 by nweber            #+#    #+#             */
-/*   Updated: 2025/07/14 20:34:08 by nweber           ###   ########.fr       */
+/*   Created: 2025/07/16 19:09:05 by nweber            #+#    #+#             */
+/*   Updated: 2025/07/16 19:24:15 by nweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../includes/push_swap.h"
+
+t_stack	*init_stack(void)
+{
+
+}
+
+void free_stack(t_stack *stack)
+{
+
+}

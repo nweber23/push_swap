@@ -6,7 +6,7 @@
 /*   By: nweber <nweber@student.42Heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 20:41:23 by nweber            #+#    #+#             */
-/*   Updated: 2025/07/15 16:41:08 by nweber           ###   ########.fr       */
+/*   Updated: 2025/07/16 19:52:07 by nweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,18 @@ int	check_sort(t_stack *stack)
 	return (1);
 }
 
-void	free_stack(t_stack *stack)
+int	get_min_i(t_stack *stack)
 {
+	t_node	*current;
+	int		min_i;
 
+	current = stack->head;
+	min_i = current->s_index;
+	while (current)
+	{
+		if (current->s_index < min_i)
+			min_i = current->s_index;
+		current = current->next;
+	}
+	return (min_i);
 }
-

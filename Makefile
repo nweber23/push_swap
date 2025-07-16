@@ -1,5 +1,5 @@
 NAME = push_swap
-CC = CC
+CC = cc
 CFLAGS = -Wall -Werror -Wextra -I./includes/
 RM = rm -f
 
@@ -23,6 +23,7 @@ fclean: clean
 	$(MAKE) -C ./libft fclean
 	$(RM) $(NAME)
 
-re: fclean all
+re: $(MAKE) fclean
+	$(MAKE) all
 
 .PHONY: all clean fclean re

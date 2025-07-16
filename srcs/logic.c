@@ -6,11 +6,40 @@
 /*   By: nweber <nweber@student.42Heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 20:34:13 by nweber            #+#    #+#             */
-/*   Updated: 2025/07/15 16:25:13 by nweber           ###   ########.fr       */
+/*   Updated: 2025/07/16 19:50:13 by nweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+int	single_rotation(t_stack *stack, int i)
+{
+	int	a;
+	int	b;
+	int	c;
+
+	(void)i;
+	a = stack->head->value;
+	b = stack->head->next->value;
+	c = stack->head->next->next->value;
+	if (a < b && b < c)
+		return (1);
+	if (b < c && a > c)
+		return (1);
+	if (a > c && a < b)
+		return (1);
+	return (0);
+}
+
+void	small_sort(t_stack *stack, int len)
+{
+	int	min_s_i;
+	int	i;
+
+	if (check_sort(stack))
+		return ;
+
+}
 
 void	sort1(t_stack *stack_a, t_stack *stack_b, int len)
 {
