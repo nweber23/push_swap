@@ -3,8 +3,8 @@ CC = cc
 CFLAGS = -Wall -Werror -Wextra -I./includes/
 RM = rm -f
 
-SRCS = srcs/main.c srcs/logic.c srcs/parsing.c srcs/utils.c srcs/ops/rotate.c \
-		srcs/ops/swap_push.c srcs/ops/reverse_rotate.c
+SRCS = srcs/main.c srcs/logic.c srcs/parsing.c srcs/utils.c \
+		srcs/operations.c srcs/stack_utils.c
 
 OBJS = $(SRCS:.c=.o)
 

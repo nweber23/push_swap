@@ -6,7 +6,7 @@
 /*   By: nweber <nweber@student.42Heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 20:34:13 by nweber            #+#    #+#             */
-/*   Updated: 2025/07/16 19:50:13 by nweber           ###   ########.fr       */
+/*   Updated: 2025/07/17 10:11:29 by nweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,19 @@ int	single_rotation(t_stack *stack, int i)
 void	small_sort(t_stack *stack, int len)
 {
 	int	min_s_i;
-	int	i;
+	int	r;
 
 	if (check_sort(stack))
 		return ;
-
+	min_s_i = get_min_i(stack);
+	r = count_r(stack->head, min_s_i);
+	if (single_rotation(stack, min_s_i))
+	{
+		if (r < len - r)
+			ra(stack, 'a', true);
+		else
+			rra(stack, 'a', true);
+	}
 }
 
 void	sort1(t_stack *stack_a, t_stack *stack_b, int len)
