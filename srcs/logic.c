@@ -6,7 +6,7 @@
 /*   By: nweber <nweber@student.42Heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 20:34:13 by nweber            #+#    #+#             */
-/*   Updated: 2025/07/17 10:11:29 by nweber           ###   ########.fr       */
+/*   Updated: 2025/07/17 10:53:28 by nweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,49 @@ void	small_sort(t_stack *stack, int len)
 	if (single_rotation(stack, min_s_i))
 	{
 		if (r < len - r)
-			ra(stack, 'a', true);
+			rotate(stack, 'a', true);
 		else
-			rra(stack, 'a', true);
+			reverse_rotate(stack, 'a', true);
 	}
+	else
+	{
+		swap(stack, 'a', true);
+		if (check_sort(stack))
+			return ;
+		if (r < len - r)
+			rotate(stack, 'a', true);
+		else
+			reverse_rotate(stack, 'a', true);
+	}
+}
+
+void	minimal_sort(t_stack *stack_a, t_stack *stack_b, int len)
+{
+	int	min_i;
+	int	i;
+	int	n;
+
+	i = 0;
+	n = len;
+	while (i++ < n - 3)
+	{
+		min_i = get_min_i(stack_a);
+		if (count_r(stack_a->head, min_i) <= n - min_i - \
+				count_r(stack_a->head, min_i))
+			while (stack_a->head->s_index != min_i)
+				rotate(stack_a, 'a', true);
+		else
+			while (stack_a->head->s_index != min_i)
+				reverse_rotate(stack_a, 'a', true);
+		if (check_sort(stack_a) && stack_b->size == 0)
+			return ;
+		push(stack_b, stack_a, 'b', true);
+		len--;
+	}
+	small_sort(stack_a, len);
+	i = 0;
+	while (i++ < n - 3)
+		push(stack_a, stack_b, 'a', true);
 }
 
 void	sort1(t_stack *stack_a, t_stack *stack_b, int len)
@@ -60,17 +99,17 @@ void	sort1(t_stack *stack_a, t_stack *stack_b, int len)
 	{
 		if (stack_a->head->s_index <= i)
 		{
-			pa(stack_b, stack_a, 'b', true);
-			rb(stack_b, 'b', true);
+			push(stack_b, stack_a, 'b', true);
+			rotate(stack_b, 'b', true);
 			i++;
 		}
 		else if (stack_a->head->s_index <= i + range)
 		{
-			pb(stack_b, stack_a, 'b', true);
+			push(stack_b, stack_a, 'b', true);
 			i++;
 		}
 		else
-			ra(stack_a, 'a', true);
+			rotate(stack_a, 'a', true);
 	}
 }
 
@@ -86,15 +125,15 @@ void	sort2(t_stack *stack_a, t_stack *stack_b, int len)
 		if (rb_count <= rrb_count)
 		{
 			while (stack_b->head->s_index != len - 1)
-				rb(stack_b, 'b', true);
-			pa(stack_a, stack_b, 'a', true);
+				rotate(stack_b, 'b', true);
+			push(stack_a, stack_b, 'a', true);
 			len--;
 		}
 		else
 		{
 			while (stack_b->head->s_index != len - 1)
-				rrb(stack_b, 'b', true);
-			pa(stack_a, stack_b, 'a', true);
+				reverse_rotate(stack_b, 'b', true);
+			push(stack_a, stack_b, 'a', true);
 			len--;
 		}
 	}

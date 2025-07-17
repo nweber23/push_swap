@@ -6,7 +6,7 @@
 /*   By: nweber <nweber@student.42Heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 19:06:51 by nweber            #+#    #+#             */
-/*   Updated: 2025/07/17 10:24:42 by nweber           ###   ########.fr       */
+/*   Updated: 2025/07/17 10:53:49 by nweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ typedef struct s_stack
 // Operations
 void	swap(t_stack *stack, char c, bool print);
 void	push(t_stack *src, t_stack *dest, char c, bool print);
+void	rotate(t_stack *stack, char c, bool print);
+void	reverse_rotate(t_stack *stack, char c, bool print);
 
 // Utils
 int		check_sort(t_stack *stack);
@@ -47,5 +49,6 @@ void	sort1(t_stack *stack_a, t_stack *stack_b, int length);
 void	sort2(t_stack *stack_a, t_stack *stack_b, int length);
 void	small_sort(t_stack *stack, int len);
 int		single_rotation(t_stack *stack, int i);
+void	minimal_sort(t_stack *stack_a, t_stack *stack_b, int len);
 
 #endif
