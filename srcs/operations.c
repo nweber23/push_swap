@@ -6,7 +6,7 @@
 /*   By: nweber <nweber@student.42Heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 10:13:07 by nweber            #+#    #+#             */
-/*   Updated: 2025/07/17 10:29:54 by nweber           ###   ########.fr       */
+/*   Updated: 2025/07/17 12:04:09 by nweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	swap(t_stack *stack, char c, bool print)
 {
-	t_node *temp;
+	t_node	*temp;
 
 	if (!stack->head || !stack->head->next)
 		return ;
@@ -48,8 +48,8 @@ void	push(t_stack *src, t_stack *dest, char c, bool print)
 
 void	rotate(t_stack *stack, char c, bool print)
 {
-	t_node *temp;
-	t_node *tail;
+	t_node	*temp;
+	t_node	*tail;
 
 	if (!stack->head || !stack->head->next)
 		return ;
@@ -70,8 +70,8 @@ void	rotate(t_stack *stack, char c, bool print)
 
 void	reverse_rotate(t_stack *stack, char c, bool print)
 {
-	t_node *temp;
-	t_node *prev;
+	t_node	*temp;
+	t_node	*prev;
 
 	if (!stack->head || !stack->head->next)
 		return ;

@@ -6,7 +6,7 @@
 /*   By: nweber <nweber@student.42Heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 19:06:51 by nweber            #+#    #+#             */
-/*   Updated: 2025/07/17 10:53:49 by nweber           ###   ########.fr       */
+/*   Updated: 2025/07/17 11:10:59 by nweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	reverse_rotate(t_stack *stack, char c, bool print);
 
 // Utils
 int		check_sort(t_stack *stack);
+int		count_r(t_node *stack, int i);
 int		get_min_i(t_stack *stack);
 void	push_stack(t_stack *stack, int value, int s_index);
 int		pop_stack(t_stack *stack);

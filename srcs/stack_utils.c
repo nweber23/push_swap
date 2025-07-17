@@ -6,20 +6,18 @@
 /*   By: nweber <nweber@student.42Heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 19:09:05 by nweber            #+#    #+#             */
-/*   Updated: 2025/07/17 10:21:57 by nweber           ###   ########.fr       */
+/*   Updated: 2025/07/17 12:04:27 by nweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-t_stack	*init_stack(void)
+void	free_stack(t_stack *stack)
 {
-
-}
-
-void free_stack(t_stack *stack)
-{
-
+	if (!stack)
+		return ;
+	while (stack)
+		pop_stack(stack);
 }
 
 void	push_stack(t_stack *stack, int value, int s_index)
