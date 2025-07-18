@@ -12,8 +12,7 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	$(MAKE) -C ./libft
-	cp ./libft/libft.a $(NAME)
-	ar rcs $(NAME) $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) -L./libft -lft -o $(NAME)
 
 clean:
 	$(MAKE) -C ./libft clean
