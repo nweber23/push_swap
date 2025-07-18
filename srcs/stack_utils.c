@@ -6,7 +6,7 @@
 /*   By: nweber <nweber@student.42Heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 19:09:05 by nweber            #+#    #+#             */
-/*   Updated: 2025/07/18 15:10:34 by nweber           ###   ########.fr       */
+/*   Updated: 2025/07/18 15:14:43 by nweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 void	free_stack(t_stack *stack)
 {
-	if (!stack)
-		return ;
 	while (stack)
 		pop_stack(stack);
 }

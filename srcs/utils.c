@@ -6,7 +6,7 @@
 /*   By: nweber <nweber@student.42Heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 20:41:23 by nweber            #+#    #+#             */
-/*   Updated: 2025/07/18 12:20:52 by nweber           ###   ########.fr       */
+/*   Updated: 2025/07/18 15:21:53 by nweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,4 +59,27 @@ void	error_exit(char *message)
 {
 	write(2, message, ft_strlen(message));
 	exit(EXIT_FAILURE);
+}
+
+void	sort(t_stack *stack_a, t_stack *stack_b, int *numbers, int length)
+{
+	if (check_sort(stack_a))
+	{
+		free_stack(stack_a);
+		free(numbers);
+		error_exit("");
+	}
+	else if (length == 2)
+		swap(stack_a, 'a', true);
+	else if (length == 3)
+		small_sort(stack_a, length);
+	else if (length <= 7)
+		minimal_sort(stack_a, stack_b, length);
+	else if (length > 7)
+	{
+		sort1(stack_a, stack_b, length);
+		sort2(stack_a, stack_b, length);
+	}
+	else
+		error_exit("");
 }
