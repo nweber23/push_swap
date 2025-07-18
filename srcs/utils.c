@@ -6,25 +6,11 @@
 /*   By: nweber <nweber@student.42Heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 20:41:23 by nweber            #+#    #+#             */
-/*   Updated: 2025/07/18 16:51:18 by nweber           ###   ########.fr       */
+/*   Updated: 2025/07/18 17:29:45 by nweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-int	check_sort(t_stack *stack)
-{
-	t_node	*temp;
-
-	temp = stack->head;
-	while (temp->next)
-	{
-		if (temp->value > temp->next->value)
-			return (0);
-		temp = temp->next;
-	}
-	return (1);
-}
 
 int	get_min_i(t_stack *stack)
 {

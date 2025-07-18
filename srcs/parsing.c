@@ -6,104 +6,110 @@
 /*   By: nweber <nweber@student.42Heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 20:34:15 by nweber            #+#    #+#             */
-/*   Updated: 2025/07/18 12:13:32 by nweber           ###   ########.fr       */
+/*   Updated: 2025/07/18 17:58:10 by nweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-static int	is_valid_arg(const char *arg)
+int	get_numbers(int argc, char **argv)
 {
-	int		i;
-	long	num;
+	int	i;
+	int	j;
+	int	count;
 
-	i = 0;
-	if (arg[i] == '-' || arg[i] == '+')
-		i++;
-	if (arg[i] == '\0')
-		return (0);
-	while (arg[i])
+	i = 1;
+	count = 0;
+	while (i < argc)
 	{
-		if (!ft_isdigit(arg[i]))
-			return (0);
+		j = 0;
+		while (argv[i][j])
+		{
+			if (!ft_isdigit(argv[i][j]) && argv[i][j] != ' '
+					&& argv[i][j] != '-')
+				return (-1);
+			if (!ft_isdigit(argv[i][j]) && (argv[i][j + 1] == ' '
+					|| argv[i][j + 1] == NULL))
+				count++;
+			j++;
+		}
 		i++;
 	}
-	num = ft_atol(arg);
-	if (num < INT_MIN || num > INT_MAX)
-		return (0);
-	return (1);
+	return (count);
 }
 
-static int	is_duplicate(t_stack *stack, long num)
+void	check_numbers(char **str, int *nums)
 {
-	t_node	*current;
+	int	i;
+	int	j;
 
-	current = stack->head;
-	while (current)
+	i = 0;
+	while (str[i])
 	{
-		if (current->value == num)
-			return (1);
-		current = current->next;
+		if (ft_atoll(str[i]) > INT_MAX \
+			|| ft_atoll(str[i]) < INT_MIN \
+			|| ft_strlen(str[i]) > 11)
+		{
+			free(nums);
+			while (str[j])
+			{
+				if (str[j])
+				{
+					free(str[j]);
+					str[j] = NULL;
+				}
+				i++;
+			}
+			free(str);
+			error_exit("ERROR");
+		}
+		i++;
+	}
+}
+
+int	is_duplicate(int *nums, int len)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < len)
+	{
+		j = i + 1;
+		while (j < len)
+		{
+			if (nums[i] == nums[j])
+				return (1);
+			j++;
+		}
+		i++;
 	}
 	return (0);
 }
 
-static int	add_number(t_stack *stack, char *arg)
+int	*parse_args(int argc, char **argv, int len)
 {
-	long	num;
-
-	if (!is_valid_arg(arg))
-		return (0);
-	num = ft_atol(arg);
-	if (is_duplicate(stack, num))
-		return (0);
-	push_stack(stack, num, 0);
-	return (1);
-}
-
-static int	split_args(char *str, t_stack *stack)
-{
-	char	**split_args;
+	char	**str;
+	int		*nums;
 	int		i;
+	int		j;
+	int		temp;
 
-	split_args = ft_split(str, ' ');
-	if (!split_args)
-		return (0);
+	nums = (int *)malloc(len);
+	if (!nums)
+		return (NULL);
 	i = 0;
-	while (split_args[i])
+	j = 0;
+	while(++i < argc)
 	{
-		if (!add_number(stack, split_args[i]))
-		{
-			int j = 0;
-			while (split_args[j])
-				free(split_args[j++]);
-			free(split_args);
-			return (0);
-		}
-		free(split_args[i]);
-		i++;
+		str = ft_split(argv[i], ' ');
+		if (!str)
+			error_exit("");
+		check_numbers(str, nums);
+		temp = 0;
+		while (str[temp])
+			str[j++] = ft_atoi(str[temp++]);
+		ft_free_array(str);
 	}
-	free(split_args);
-	return (1);
-}
-
-int	parse_args(int argc, char **argv, t_stack *stack)
-{
-	int		i;
-
-	if (argc < 2)
-		return (0);
-	if (argc == 2)
-		return (split_args(argv[1], stack));
-	i = 1;
-	while (i < argc)
-	{
-		if (!add_number(stack, argv[i]))
-		{
-			ft_putstr_fd("Error\n", STDERR_FILENO);
-			return (0);
-		}
-		i++;
-	}
-	return (1);
+	return (nums);
 }

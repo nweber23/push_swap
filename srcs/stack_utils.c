@@ -6,7 +6,7 @@
 /*   By: nweber <nweber@student.42Heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 19:09:05 by nweber            #+#    #+#             */
-/*   Updated: 2025/07/18 15:14:43 by nweber           ###   ########.fr       */
+/*   Updated: 2025/07/18 17:29:50 by nweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,18 @@ void	assign_stack_index(t_stack *stack)
 		current->s_index = index++;
 		current = current->next;
 	}
+}
+
+int	check_sort(t_stack *stack)
+{
+	t_node	*temp;
+
+	temp = stack->head;
+	while (temp->next)
+	{
+		if (temp->value > temp->next->value)
+			return (0);
+		temp = temp->next;
+	}
+	return (1);
 }

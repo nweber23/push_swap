@@ -6,7 +6,7 @@
 /*   By: nweber <nweber@student.42Heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 19:06:51 by nweber            #+#    #+#             */
-/*   Updated: 2025/07/18 15:26:49 by nweber           ###   ########.fr       */
+/*   Updated: 2025/07/18 17:58:15 by nweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ void	sort(t_stack *stack_a, t_stack *stack_b, int *numbers, int length);
 void	error_exit(char *message);
 
 // Parsing
-int		parse_args(int argc, char **argv, t_stack *stack);
+int		*parse_args(int argc, char **argv, int len);
+int		get_numbers(int argc, char **argv);
+int		is_duplicate(int *numbers, int len);
 
 #endif
