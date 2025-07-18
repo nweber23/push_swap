@@ -6,7 +6,7 @@
 /*   By: nweber <nweber@student.42Heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 19:09:05 by nweber            #+#    #+#             */
-/*   Updated: 2025/07/17 12:04:27 by nweber           ###   ########.fr       */
+/*   Updated: 2025/07/18 12:07:00 by nweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,20 @@ int	pop_stack(t_stack *stack)
 	free(temp);
 	stack->size--;
 	return (value);
+}
+
+void	assgin_stack_index(t_stack *stack)
+{
+	t_node	*current;
+	int		index;
+
+	if (!stack || stack->size == 0)
+		return ;
+	current = stack->head;
+	index = 0;
+	while (current)
+	{
+		current->s_index = index++;
+		current = current->next;
+	}
 }

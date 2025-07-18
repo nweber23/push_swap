@@ -6,7 +6,7 @@
 /*   By: nweber <nweber@student.42Heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 20:34:15 by nweber            #+#    #+#             */
-/*   Updated: 2025/07/18 10:21:58 by nweber           ###   ########.fr       */
+/*   Updated: 2025/07/18 12:13:32 by nweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static int	is_duplicate(t_stack *stack, long num)
 
 static int	add_number(t_stack *stack, char *arg)
 {
-	long num;
+	long	num;
 
 	if (!is_valid_arg(arg))
 		return (0);
@@ -61,7 +61,7 @@ static int	add_number(t_stack *stack, char *arg)
 	return (1);
 }
 
-static int	split_args(char *str, char *args)
+static int	split_args(char *str, t_stack *stack)
 {
 	char	**split_args;
 	int		i;
@@ -72,13 +72,11 @@ static int	split_args(char *str, char *args)
 	i = 0;
 	while (split_args[i])
 	{
-		if (!add_number(args, split_args[i]))
+		if (!add_number(stack, split_args[i]))
 		{
-			while (split_args[i])
-			{
-				free(split_args[i]);
-				i++;
-			}
+			int j = 0;
+			while (split_args[j])
+				free(split_args[j++]);
 			free(split_args);
 			return (0);
 		}
@@ -92,7 +90,6 @@ static int	split_args(char *str, char *args)
 int	parse_args(int argc, char **argv, t_stack *stack)
 {
 	int		i;
-	long	num;
 
 	if (argc < 2)
 		return (0);

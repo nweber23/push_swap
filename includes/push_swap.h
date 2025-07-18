@@ -6,7 +6,7 @@
 /*   By: nweber <nweber@student.42Heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 19:06:51 by nweber            #+#    #+#             */
-/*   Updated: 2025/07/17 11:10:59 by nweber           ###   ########.fr       */
+/*   Updated: 2025/07/18 12:21:03 by nweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,10 @@ typedef struct s_stack
 	int				size;
 }	t_stack;
 
+// Main
+
+int	main(int argc, char **argv);
+
 // Operations
 void	swap(t_stack *stack, char c, bool print);
 void	push(t_stack *src, t_stack *dest, char c, bool print);
@@ -44,6 +48,8 @@ int		count_r(t_node *stack, int i);
 int		get_min_i(t_stack *stack);
 void	push_stack(t_stack *stack, int value, int s_index);
 int		pop_stack(t_stack *stack);
+void	assgin_stack_index(t_stack *stack);
+void	free_stack(t_stack *stack);
 
 // Logic functions
 void	sort1(t_stack *stack_a, t_stack *stack_b, int length);
@@ -51,5 +57,11 @@ void	sort2(t_stack *stack_a, t_stack *stack_b, int length);
 void	small_sort(t_stack *stack, int len);
 int		single_rotation(t_stack *stack, int i);
 void	minimal_sort(t_stack *stack_a, t_stack *stack_b, int len);
+
+// Error handling
+void	error_exit(char *message);
+
+// Parsing
+int		parse_args(int argc, char **argv, t_stack *stack);
 
 #endif

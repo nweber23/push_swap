@@ -6,7 +6,7 @@
 /*   By: nweber <nweber@student.42Heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 20:41:23 by nweber            #+#    #+#             */
-/*   Updated: 2025/07/17 12:04:33 by nweber           ###   ########.fr       */
+/*   Updated: 2025/07/18 12:20:52 by nweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,10 @@ int	count_r(t_node *stack, int i)
 		stack = stack->next;
 	}
 	return (count);
+}
+
+void	error_exit(char *message)
+{
+	write(2, message, ft_strlen(message));
+	exit(EXIT_FAILURE);
 }
