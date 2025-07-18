@@ -6,7 +6,7 @@
 /*   By: nweber <nweber@student.42Heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 20:41:23 by nweber            #+#    #+#             */
-/*   Updated: 2025/07/18 17:29:45 by nweber           ###   ########.fr       */
+/*   Updated: 2025/07/18 18:10:08 by nweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,4 +68,25 @@ void	sort(t_stack *stack_a, t_stack *stack_b, int *numbers, int length)
 	}
 	else
 		error_exit("");
+}
+
+void	insertion_sort(int *nums, int n)
+{
+	int	element;
+	int	i;
+	int	j;
+
+	i = 1;
+	while (i < n)
+	{
+		element = nums[i];
+		j = i - 1;
+		while (j >= 0 && nums[j] > element)
+		{
+			nums[j + 1] = nums[j];
+			j = j - 1;
+		}
+		nums[j + 1] = element;
+		i++;
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: nweber <nweber@student.42Heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 19:06:51 by nweber            #+#    #+#             */
-/*   Updated: 2025/07/18 17:58:15 by nweber           ###   ########.fr       */
+/*   Updated: 2025/07/18 18:10:29 by nweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ void	small_sort(t_stack *stack, int len);
 int		single_rotation(t_stack *stack, int i);
 void	minimal_sort(t_stack *stack_a, t_stack *stack_b, int len);
 void	sort(t_stack *stack_a, t_stack *stack_b, int *numbers, int length);
+void	insertion_sort(int *nums, int n);
 
 // Error handling
 void	error_exit(char *message);

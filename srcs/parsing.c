@@ -6,7 +6,7 @@
 /*   By: nweber <nweber@student.42Heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 20:34:15 by nweber            #+#    #+#             */
-/*   Updated: 2025/07/18 17:58:10 by nweber           ###   ########.fr       */
+/*   Updated: 2025/07/18 19:10:54 by nweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	get_numbers(int argc, char **argv)
 					&& argv[i][j] != '-')
 				return (-1);
 			if (!ft_isdigit(argv[i][j]) && (argv[i][j + 1] == ' '
-					|| argv[i][j + 1] == NULL))
+					|| argv[i][j + 1] == '\0'))
 				count++;
 			j++;
 		}
@@ -41,25 +41,16 @@ int	get_numbers(int argc, char **argv)
 void	check_numbers(char **str, int *nums)
 {
 	int	i;
-	int	j;
 
 	i = 0;
 	while (str[i])
 	{
-		if (ft_atoll(str[i]) > INT_MAX \
-			|| ft_atoll(str[i]) < INT_MIN \
+		if (ft_atol(str[i]) > INT_MAX \
+			|| ft_atol(str[i]) < INT_MIN \
 			|| ft_strlen(str[i]) > 11)
 		{
 			free(nums);
-			while (str[j])
-			{
-				if (str[j])
-				{
-					free(str[j]);
-					str[j] = NULL;
-				}
-				i++;
-			}
+			ft_free_array(str);
 			free(str);
 			error_exit("ERROR");
 		}
@@ -108,7 +99,7 @@ int	*parse_args(int argc, char **argv, int len)
 		check_numbers(str, nums);
 		temp = 0;
 		while (str[temp])
-			str[j++] = ft_atoi(str[temp++]);
+			nums[j++] = ft_atoi(str[temp++]);
 		ft_free_array(str);
 	}
 	return (nums);
