@@ -6,7 +6,7 @@
 /*   By: nweber <nweber@student.42Heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 20:41:23 by nweber            #+#    #+#             */
-/*   Updated: 2025/07/18 15:21:53 by nweber           ###   ########.fr       */
+/*   Updated: 2025/07/18 16:51:18 by nweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ int	get_min_i(t_stack *stack)
 	min_i = current->s_index;
 	while (current)
 	{
+		current = current->next;
 		if (current->s_index < min_i)
 			min_i = current->s_index;
-		current = current->next;
 	}
 	return (min_i);
 }
