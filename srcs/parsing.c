@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nweber <nweber@student.42Heilbronn.de>     +#+  +:+       +#+        */
+/*   By: niklas-weber <niklas-weber@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 20:34:15 by nweber            #+#    #+#             */
-/*   Updated: 2025/07/18 19:10:54 by nweber           ###   ########.fr       */
+/*   Updated: 2025/07/20 16:39:07 by niklas-webe      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	get_numbers(int argc, char **argv)
 			if (!ft_isdigit(argv[i][j]) && argv[i][j] != ' '
 					&& argv[i][j] != '-')
 				return (-1);
-			if (!ft_isdigit(argv[i][j]) && (argv[i][j + 1] == ' '
+			if (ft_isdigit(argv[i][j]) && (argv[i][j + 1] == ' '
 					|| argv[i][j + 1] == '\0'))
 				count++;
 			j++;
@@ -51,7 +51,6 @@ void	check_numbers(char **str, int *nums)
 		{
 			free(nums);
 			ft_free_array(str);
-			free(str);
 			error_exit("ERROR");
 		}
 		i++;
@@ -86,7 +85,7 @@ int	*parse_args(int argc, char **argv, int len)
 	int		j;
 	int		temp;
 
-	nums = (int *)malloc(len);
+	nums = (int *)malloc(sizeof(int) * len);
 	if (!nums)
 		return (NULL);
 	i = 0;

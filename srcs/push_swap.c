@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nweber <nweber@student.42Heilbronn.de>     +#+  +:+       +#+        */
+/*   By: niklas-weber <niklas-weber@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 20:34:10 by nweber            #+#    #+#             */
-/*   Updated: 2025/07/18 19:01:56 by nweber           ###   ########.fr       */
+/*   Updated: 2025/07/20 16:36:33 by niklas-webe      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	main(int argc, char **argv)
 	int		count;
 	int		*numbers;
 
-	if (argc < 2)
+	if (argc == 1)
 		error_exit("");
 	count = get_numbers(argc, argv);
 	numbers = parse_args(argc, argv, count);

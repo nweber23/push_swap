@@ -22,7 +22,8 @@ fclean: clean
 	$(MAKE) -C ./libft fclean
 	$(RM) $(NAME)
 
-re: $(MAKE) fclean
+re: 
+	$(MAKE) fclean
 	$(MAKE) all
 
 .PHONY: all clean fclean re
