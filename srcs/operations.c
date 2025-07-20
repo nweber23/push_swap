@@ -34,10 +34,10 @@ void	push(t_stack *src, t_stack *dest, char c, bool print)
 {
 	int	i;
 
-	if (!src->head)
+	if (!dest->head)
 		return ;
-	i = src->head->s_index;
-	push_stack(dest, i, pop_stack(src));
+	i = dest->head->s_index;
+	push_stack(src, i, pop_stack(dest));
 	if (print)
 	{
 		write(1, "p", 1);
