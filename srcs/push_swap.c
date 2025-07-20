@@ -3,23 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niklas-weber <niklas-weber@student.42.f    +#+  +:+       +#+        */
+/*   By: nweber <nweber@student.42Heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 20:34:10 by nweber            #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2025/07/20 22:00:47 by niklas-webe      ###   ########.fr       */
+=======
+/*   Updated: 2025/07/20 19:41:10 by nweber           ###   ########.fr       */
+>>>>>>> 471ef6ea0ca563575663b471a53e6d14535dd47c
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-static int	index_of(int n, int *arr)
+static int index_of(int n, int *arr, int len)
 {
-	int	i;
-
-	i = 0;
-	while (arr[i] != n)
+	int i = 0;
+	while (i < len)
+	{
+		if (arr[i] == n)
+			return i;
 		i++;
-	return (i);
+	}
+	return -1;
 }
 
 static void	init_stack(t_stack *stack_a, t_stack *stack_b, int *nums, int c)
@@ -38,7 +44,7 @@ static void	init_stack(t_stack *stack_a, t_stack *stack_b, int *nums, int c)
 	temp = stack_a->head;
 	while (temp)
 	{
-		temp->s_index = index_of(temp->value, nums);
+		temp->s_index = index_of(temp->value, nums, c);
 		temp = temp->next;
 	}
 }
