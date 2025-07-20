@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nweber <nweber@student.42Heilbronn.de>     +#+  +:+       +#+        */
+/*   By: niklas-weber <niklas-weber@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 19:06:51 by nweber            #+#    #+#             */
-/*   Updated: 2025/07/18 18:10:29 by nweber           ###   ########.fr       */
+/*   Updated: 2025/07/20 18:15:55 by niklas-webe      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ int		count_r(t_node *stack, int i);
 int		get_min_i(t_stack *stack);
 void	push_stack(t_stack *stack, int value, int s_index);
 int		pop_stack(t_stack *stack);
-void	assign_stack_index(t_stack *stack);
 void	free_stack(t_stack *stack);
 
 // Logic functions

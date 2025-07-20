@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stack_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nweber <nweber@student.42Heilbronn.de>     +#+  +:+       +#+        */
+/*   By: niklas-weber <niklas-weber@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 19:09:05 by nweber            #+#    #+#             */
-/*   Updated: 2025/07/18 17:29:50 by nweber           ###   ########.fr       */
+/*   Updated: 2025/07/20 18:15:35 by niklas-webe      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,22 +45,6 @@ int	pop_stack(t_stack *stack)
 	free(temp);
 	stack->size--;
 	return (value);
-}
-
-void	assign_stack_index(t_stack *stack)
-{
-	t_node	*current;
-	int		index;
-
-	if (!stack || stack->size == 0)
-		return ;
-	current = stack->head;
-	index = 0;
-	while (current)
-	{
-		current->s_index = index++;
-		current = current->next;
-	}
 }
 
 int	check_sort(t_stack *stack)
