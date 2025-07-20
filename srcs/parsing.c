@@ -6,7 +6,7 @@
 /*   By: niklas-weber <niklas-weber@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 20:34:15 by nweber            #+#    #+#             */
-/*   Updated: 2025/07/20 16:39:07 by niklas-webe      ###   ########.fr       */
+/*   Updated: 2025/07/20 17:35:51 by niklas-webe      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ void	check_numbers(char **str, int *nums)
 			|| ft_atol(str[i]) < INT_MIN \
 			|| ft_strlen(str[i]) > 11)
 		{
-			free(nums);
 			ft_free_array(str);
+			free(nums);
 			error_exit("ERROR");
 		}
 		i++;

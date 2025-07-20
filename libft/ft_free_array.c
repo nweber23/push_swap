@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_free_array.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nweber <nweber@student.42Heilbronn.de>     +#+  +:+       +#+        */
+/*   By: niklas-weber <niklas-weber@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 17:44:45 by nweber            #+#    #+#             */
-/*   Updated: 2025/07/18 17:48:13 by nweber           ###   ########.fr       */
+/*   Updated: 2025/07/20 17:38:20 by niklas-webe      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,18 @@ void	ft_free_array(char **str)
 	int	i;
 
 	i = 0;
-	while (str[i])
+	if (str)
 	{
-		if (str[i])
+		while (str && str[i])
 		{
-			free(str[i]);
-			str[i] = NULL;
+			if (str[i])
+			{
+				free(str[i]);
+				str[i] = NULL;
+			}
+			i++;
 		}
-		i++;
+		free(str);
+		str = NULL;
 	}
-	free(str);
-	str = NULL;
 }
