@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   operations.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nweber <nweber@student.42Heilbronn.de>     +#+  +:+       +#+        */
+/*   By: niklas-weber <niklas-weber@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 10:13:07 by nweber            #+#    #+#             */
-/*   Updated: 2025/07/17 12:04:09 by nweber           ###   ########.fr       */
+/*   Updated: 2025/07/20 21:52:03 by niklas-webe      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,12 @@ void	swap(t_stack *stack, char c, bool print)
 
 void	push(t_stack *src, t_stack *dest, char c, bool print)
 {
-	int	i;
+	int	value;
 
-	if (!dest->head)
+	if (!src->head)
 		return ;
-	i = dest->head->s_index;
-	push_stack(src, i, pop_stack(dest));
+	value = pop_stack(src);
+	push_stack(dest, value, src->head ? src->head->s_index : 0);
 	if (print)
 	{
 		write(1, "p", 1);

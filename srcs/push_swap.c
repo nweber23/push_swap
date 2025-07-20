@@ -6,7 +6,7 @@
 /*   By: niklas-weber <niklas-weber@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 20:34:10 by nweber            #+#    #+#             */
-/*   Updated: 2025/07/20 16:36:33 by niklas-webe      ###   ########.fr       */
+/*   Updated: 2025/07/20 22:00:47 by niklas-webe      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void	init_stack(t_stack *stack_a, t_stack *stack_b, int *nums, int c)
 	stack_b->size = 0;
 	i = c;
 	while (--i >= 0)
-		push_stack(stack_a, 0, nums[i]);
+		push_stack(stack_a, nums[i], 0);
 	insertion_sort(nums, c);
 	temp = stack_a->head;
 	while (temp)
@@ -41,6 +41,17 @@ static void	init_stack(t_stack *stack_a, t_stack *stack_b, int *nums, int c)
 		temp->s_index = index_of(temp->value, nums);
 		temp = temp->next;
 	}
+}
+
+void print_stack(t_stack *stack, char name)
+{
+	t_node *temp = stack->head;
+	printf("Stack %c: ", name);
+	while (temp) {
+		printf("%d(%d) ", temp->value, temp->s_index);
+		temp = temp->next;
+	}
+	printf("\n");
 }
 
 int	main(int argc, char **argv)
@@ -51,14 +62,14 @@ int	main(int argc, char **argv)
 	int		*numbers;
 
 	if (argc == 1)
-		error_exit("");
+		error_exit("INVALID INPUT");
 	count = get_numbers(argc, argv);
 	numbers = parse_args(argc, argv, count);
 	if (count <= 1 || is_duplicate(numbers, count))
 	{
 		free(numbers);
 		if (count == 1)
-			error_exit("");
+			error_exit("ONLY ONE NUMBER");
 		error_exit("ERROR");
 	}
 	init_stack(&a, &b, numbers, count);

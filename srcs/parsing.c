@@ -6,7 +6,7 @@
 /*   By: niklas-weber <niklas-weber@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 20:34:15 by nweber            #+#    #+#             */
-/*   Updated: 2025/07/20 17:35:51 by niklas-webe      ###   ########.fr       */
+/*   Updated: 2025/07/20 21:55:00 by niklas-webe      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	check_numbers(char **str, int *nums)
 		{
 			ft_free_array(str);
 			free(nums);
-			error_exit("ERROR");
+			error_exit("FALSE INPUT");
 		}
 		i++;
 	}
@@ -94,7 +94,7 @@ int	*parse_args(int argc, char **argv, int len)
 	{
 		str = ft_split(argv[i], ' ');
 		if (!str)
-			error_exit("");
+			error_exit("MALLOC FAIL");
 		check_numbers(str, nums);
 		temp = 0;
 		while (str[temp])

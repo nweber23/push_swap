@@ -6,7 +6,7 @@
 /*   By: niklas-weber <niklas-weber@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 20:41:23 by nweber            #+#    #+#             */
-/*   Updated: 2025/07/20 17:41:43 by niklas-webe      ###   ########.fr       */
+/*   Updated: 2025/07/20 21:56:26 by niklas-webe      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,15 @@ int	get_min_i(t_stack *stack)
 	t_node	*current;
 	int		min_i;
 
+	if (!stack->head)
+		return (-1);
 	current = stack->head;
 	min_i = current->s_index;
 	while (current)
 	{
-		current = current->next;
 		if (current->s_index < min_i)
 			min_i = current->s_index;
+		current = current->next;
 	}
 	return (min_i);
 }
@@ -53,7 +55,7 @@ void	sort(t_stack *stack_a, t_stack *stack_b, int *numbers, int length)
 	{
 		free(numbers);
 		free_stack(stack_a);
-		error_exit("");
+		error_exit("ALREADY SORTED");
 	}
 	else if (length == 2)
 		swap(stack_a, 'a', true);
@@ -67,7 +69,7 @@ void	sort(t_stack *stack_a, t_stack *stack_b, int *numbers, int length)
 		sort2(stack_a, stack_b, length);
 	}
 	else
-		error_exit("");
+		error_exit("COULDNT SORT");
 }
 
 void	insertion_sort(int *nums, int n)
