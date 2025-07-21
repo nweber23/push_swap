@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   operations.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niklas-weber <niklas-weber@student.42.f    +#+  +:+       +#+        */
+/*   By: nweber <nweber@student.42Heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 10:13:07 by nweber            #+#    #+#             */
-/*   Updated: 2025/07/20 21:52:03 by niklas-webe      ###   ########.fr       */
+/*   Updated: 2025/07/21 10:21:01 by nweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,10 @@ void	push(t_stack *src, t_stack *dest, char c, bool print)
 {
 	int	value;
 
-	if (!src->head)
+	if (dest->head == NULL)
 		return ;
-	value = pop_stack(src);
-	push_stack(dest, value, src->head ? src->head->s_index : 0);
+	value = dest->head->s_index;
+	push_stack(src, value, pop_stack(dest));
 	if (print)
 	{
 		write(1, "p", 1);
@@ -70,21 +70,21 @@ void	rotate(t_stack *stack, char c, bool print)
 
 void	reverse_rotate(t_stack *stack, char c, bool print)
 {
+	t_node	*current;
 	t_node	*temp;
-	t_node	*prev;
 
-	if (!stack->head || !stack->head->next)
+	if (!stack->head || !stack->head->next || !stack)
 		return ;
-	prev = stack->head;
-	while (prev->next->next)
-		prev = prev->next;
-	temp = prev->next;
-	prev->next = NULL;
+	current = stack->head;
+	while (current->next->next != NULL)
+		current = current->next;
+	temp = current->next;
+	current->next = NULL;
 	temp->next = stack->head;
 	stack->head = temp;
 	if (print)
 	{
-		write(1, "rr", 1);
+		write(1, "rr", 2);
 		write(1, &c, 1);
 		write(1, "\n", 1);
 	}
