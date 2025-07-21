@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niklas-weber <niklas-weber@student.42.f    +#+  +:+       +#+        */
+/*   By: nweber <nweber@student.42Heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 20:34:15 by nweber            #+#    #+#             */
-/*   Updated: 2025/07/20 21:55:00 by niklas-webe      ###   ########.fr       */
+/*   Updated: 2025/07/21 14:42:56 by nweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	check_numbers(char **str, int *nums)
 		{
 			ft_free_array(str);
 			free(nums);
-			error_exit("FALSE INPUT");
+			error_exit("NUMBER EXCEEDS INT LIMIT\n");
 		}
 		i++;
 	}
@@ -94,7 +94,7 @@ int	*parse_args(int argc, char **argv, int len)
 	{
 		str = ft_split(argv[i], ' ');
 		if (!str)
-			error_exit("MALLOC FAIL");
+			error_exit("SPLIT FAIL");
 		check_numbers(str, nums);
 		temp = 0;
 		while (str[temp])

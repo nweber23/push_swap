@@ -6,7 +6,7 @@
 /*   By: nweber <nweber@student.42Heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 22:15:54 by nweber            #+#    #+#             */
-/*   Updated: 2025/07/20 22:16:04 by nweber           ###   ########.fr       */
+/*   Updated: 2025/07/21 14:44:01 by nweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,15 +53,15 @@ int	main(int argc, char **argv)
 	int		*numbers;
 
 	if (argc == 1)
-		error_exit("INVALID INPUT");
+		error_exit("NO INPUT");
 	count = get_numbers(argc, argv);
 	numbers = parse_args(argc, argv, count);
 	if (count <= 1 || is_duplicate(numbers, count))
 	{
 		free(numbers);
 		if (count == 1)
-			error_exit("ONLY ONE NUMBER");
-		error_exit("ERROR");
+			error_exit("ONLY ONE NUMBER\n");
+		error_exit("THERE ARE DUPLICATES\n");
 	}
 	init_stack(&a, &b, numbers, count);
 	sort(&a, &b, numbers, count);
