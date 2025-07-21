@@ -6,7 +6,7 @@
 /*   By: nweber <nweber@student.42Heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 10:13:07 by nweber            #+#    #+#             */
-/*   Updated: 2025/07/21 10:21:01 by nweber           ###   ########.fr       */
+/*   Updated: 2025/07/21 12:35:02 by nweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,17 @@ void	swap(t_stack *stack, char c, bool print)
 	}
 }
 
-void	push(t_stack *src, t_stack *dest, char c, bool print)
+void	push(t_stack *dest, t_stack *src, char c, bool print)
 {
 	int	value;
+	int	s_index;
 
-	if (dest->head == NULL)
+	if (!src->head)
 		return ;
-	value = dest->head->s_index;
-	push_stack(src, value, pop_stack(dest));
+	value = src->head->value;
+	s_index = src->head->s_index;
+	push_stack(dest, value, s_index);
+	pop_stack(src);
 	if (print)
 	{
 		write(1, "p", 1);
