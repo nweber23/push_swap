@@ -6,7 +6,7 @@
 /*   By: nweber <nweber@student.42Heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 10:59:07 by nweber            #+#    #+#             */
-/*   Updated: 2025/08/06 11:29:44 by nweber           ###   ########.fr       */
+/*   Updated: 2025/08/06 13:15:23 by nweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,17 +116,18 @@ int	ft_fgets(char **line)
 	if (!buffer)
 		return (-1);
 	count = read(0, &input, 1);
-	while (count && input != '\n' && input != '\0')
+	while (count > 0 && input != '\n' && i < BUFFER_SIZE - 1)
 	{
-		if (input != '\n' && input != '\0')
-			buffer[i] = input;
+		buffer[i] = input;
 		i++;
 		count = read(0, &input, 1);
 	}
-	buffer[i] = '\n';
-	i++;
+	if (count > 0 && input == '\n')
+		buffer[i++] = '\n';
 	buffer[i] = '\0';
 	*line = ft_strdup(buffer);
 	free(buffer);
+	if (count == 0 && i == 0)
+		return (0);
 	return (i);
 }

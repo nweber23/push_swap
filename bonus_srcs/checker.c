@@ -6,7 +6,7 @@
 /*   By: nweber <nweber@student.42Heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 10:36:09 by nweber            #+#    #+#             */
-/*   Updated: 2025/08/06 13:10:42 by nweber           ###   ########.fr       */
+/*   Updated: 2025/08/06 13:20:16 by nweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,28 +49,34 @@ static void	init_stack(t_stack *stack_a, t_stack *stack_b, int *nums, int count)
 	stack_a->size = 0;
 	stack_b->head = NULL;
 	stack_b->size = 0;
-	i = 0;
-	while (i < count)
+	i = count - 1;
+	while (i >= 0)
 	{
 		push_stack(stack_a, nums[i], i);
-		i++;
+		i--;
 	}
 }
 
 static void	get_instructions(t_stack *stack_a, t_stack *stack_b)
 {
 	char	*line;
+	int		result;
 
-	while (ft_fgets(&line))
+	while ((result = ft_fgets(&line)) > 0)
 	{
 		if (ft_strncmp(line, "\n", 1) == 0)
-			break ;
-		execution(stack_a, stack_b, line);
+		{
+			free(line);
+			break;
+		}
+		if (!execution(stack_a, stack_b, line))
+		{
+			free(line);
+			error_exit("Error\n");
+		}
 		free(line);
-		line = NULL;
 	}
-	free(line);
-	if (check_sort(stack_a))
+	if (check_sort(stack_a) && stack_b->size == 0)
 		write(1, "OK\n", 3);
 	else
 		write(1, "KO\n", 3);
@@ -98,4 +104,5 @@ int	main(int argc, char **argv)
 	get_instructions(&stack_a, &stack_b);
 	free(numbers);
 	free_stack(&stack_a);
+	free_stack(&stack_b);
 }
