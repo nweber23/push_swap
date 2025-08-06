@@ -1,28 +1,36 @@
 NAME = push_swap
+SRC = srcs/push_swap.c srcs/logic.c srcs/parsing.c srcs/utils.c srcs/operations.c srcs/stack_utils.c
+OBJ_DIR = objs
+OBJ = $(SRC:srcs/%.c=$(OBJ_DIR)/%.o)
 CC = cc
-CFLAGS = -Wall -Werror -Wextra -I./includes/
-RM = rm -f
+CFLAGS = -Wall -Wextra -Werror -I./includes/ -I./libft/includes/
 
-SRCS = srcs/push_swap.c srcs/logic.c srcs/parsing.c srcs/utils.c \
-		srcs/operations.c srcs/stack_utils.c
+# Library paths
+LIBFT_DIR = ./libft
+LIBFT = $(LIBFT_DIR)/libft.a
 
-OBJS = $(SRCS:.c=.o)
+all: $(LIBFT) $(NAME)
 
-all: $(NAME)
+$(NAME): $(OBJ)
+	$(CC) $(CFLAGS) $(OBJ) $(LIBFT) -o $(NAME)
 
-$(NAME): $(OBJS)
-	$(MAKE) -C ./libft
-	$(CC) $(CFLAGS) $(OBJS) -L./libft -lft -o $(NAME)
+$(OBJ_DIR)/%.o: srcs/%.c includes/*.h
+	@mkdir -p $(OBJ_DIR)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(LIBFT):
+	$(MAKE) fclean -C $(LIBFT_DIR)
+	$(MAKE) -C $(LIBFT_DIR)
 
 clean:
-	$(MAKE) -C ./libft clean
-	$(RM) $(OBJS)
+	rm -rf $(OBJ_DIR)
+	$(MAKE) clean -C $(LIBFT_DIR)
 
 fclean: clean
-	$(MAKE) -C ./libft fclean
-	$(RM) $(NAME)
+	rm -f $(NAME)
+	$(MAKE) fclean -C $(LIBFT_DIR)
 
-re: 
+re:
 	$(MAKE) fclean
 	$(MAKE) all
 
