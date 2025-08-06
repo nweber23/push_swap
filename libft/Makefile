@@ -44,12 +44,12 @@ bonus: $(OBJS) $(BONUS_OBJS) $(PRINTF_OBJS)
 
 # Rule for libft sources (in root directory)
 $(OBJ_DIR)/%.o: %.c
-	@mkdir -p $(OBJ_DIR)
+	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 # Rule for printf sources (in printf folder)
 $(OBJ_DIR)/%.o: $(PRINTF_DIR)/%.c
-	@mkdir -p $(OBJ_DIR)
+	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
