@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niklas-weber <niklas-weber@student.42.f    +#+  +:+       +#+        */
+/*   By: nweber <nweber@student.42Heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 20:41:23 by nweber            #+#    #+#             */
-/*   Updated: 2025/07/20 21:56:26 by niklas-webe      ###   ########.fr       */
+/*   Updated: 2025/07/21 18:58:38 by nweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	sort(t_stack *stack_a, t_stack *stack_b, int *numbers, int length)
 	{
 		free(numbers);
 		free_stack(stack_a);
-		error_exit("ALREADY SORTED");
+		error_exit("");
 	}
 	else if (length == 2)
 		swap(stack_a, 'a', true);

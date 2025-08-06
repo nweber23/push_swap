@@ -6,7 +6,7 @@
 /*   By: nweber <nweber@student.42Heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 20:34:15 by nweber            #+#    #+#             */
-/*   Updated: 2025/07/21 14:42:56 by nweber           ###   ########.fr       */
+/*   Updated: 2025/08/06 09:27:40 by nweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,9 @@ void	check_numbers(char **str, int *nums)
 			|| ft_atol(str[i]) < INT_MIN \
 			|| ft_strlen(str[i]) > 11)
 		{
-			ft_free_array(str);
+			ft_array_free(str);
 			free(nums);
-			error_exit("NUMBER EXCEEDS INT LIMIT\n");
+			error_exit("Error\n");
 		}
 		i++;
 	}
@@ -94,12 +94,12 @@ int	*parse_args(int argc, char **argv, int len)
 	{
 		str = ft_split(argv[i], ' ');
 		if (!str)
-			error_exit("SPLIT FAIL");
+			error_exit("Error\n");
 		check_numbers(str, nums);
 		temp = 0;
 		while (str[temp])
 			nums[j++] = ft_atoi(str[temp++]);
-		ft_free_array(str);
+		ft_array_free(str);
 	}
 	return (nums);
 }
