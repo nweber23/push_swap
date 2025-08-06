@@ -1,34 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free_array.c                                    :+:      :+:    :+:   */
+/*   ft_lstsize_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niklas-weber <niklas-weber@student.42.f    +#+  +:+       +#+        */
+/*   By: nweber <nweber@student.42Heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/18 17:44:45 by nweber            #+#    #+#             */
-/*   Updated: 2025/07/20 17:38:20 by niklas-webe      ###   ########.fr       */
+/*   Created: 2025/07/05 10:30:25 by nweber            #+#    #+#             */
+/*   Updated: 2025/07/07 12:55:43 by nweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_free_array(char **str)
+// counts the nodes in the list
+int	ft_lstsize(t_list *lst)
 {
-	int	i;
+	int	count;
 
-	i = 0;
-	if (str)
+	count = 0;
+	while (lst)
 	{
-		while (str && str[i])
-		{
-			if (str[i])
-			{
-				free(str[i]);
-				str[i] = NULL;
-			}
-			i++;
-		}
-		free(str);
-		str = NULL;
+		count++;
+		lst = lst->next;
 	}
+	return (count);
 }

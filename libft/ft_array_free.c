@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
+/*   ft_array_free.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nweber <nweber@student.42Heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/05 10:34:25 by nweber            #+#    #+#             */
-/*   Updated: 2025/07/07 16:13:08 by nweber           ###   ########.fr       */
+/*   Created: 2025/08/01 15:18:29 by nweber            #+#    #+#             */
+/*   Updated: 2025/08/01 15:18:50 by nweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstadd_back(t_list **lst, t_list *new)
+void	ft_array_free(char **array)
 {
-	t_list	*last;
+	int	i;
 
-	if (!lst || !new)
+	if (!array)
 		return ;
-	if (!*lst)
+	i = 0;
+	while (array[i])
 	{
-		*lst = new;
-		return ;
+		free(array[i]);
+		i++;
 	}
-	last = ft_lstlast(*lst);
-	last->next = new;
+	free(array);
 }

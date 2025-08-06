@@ -6,7 +6,7 @@
 /*   By: nweber <nweber@student.42Heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 12:48:40 by nweber            #+#    #+#             */
-/*   Updated: 2025/07/18 17:46:40 by nweber           ###   ########.fr       */
+/*   Updated: 2025/08/06 09:28:37 by nweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stddef.h>
+# include "printf/includes/ft_printf.h"
 
 typedef struct s_list
 {
@@ -34,6 +35,7 @@ int		ft_tolower(int c);
 int		ft_sqrt(int n);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 int		ft_memcmp(const void *s1, const void *s2, size_t n);
+int		ft_strcmp(const char *s1, const char *s2);
 char	*ft_strchr(const char *s, int c);
 char	*ft_strrchr(const char *s, int c);
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
@@ -58,7 +60,8 @@ void	ft_putchar_fd(char c, int fd);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
-void	ft_free_array(char **str);
+void	ft_array_free(char **array);
+double	ft_atof(const char *str);
 long	ft_atol(const char *str);
 
 t_list	*ft_lstnew(void *content);

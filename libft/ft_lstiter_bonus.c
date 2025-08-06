@@ -1,19 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
+/*   ft_lstiter_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nweber <nweber@student.42Heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/03 17:56:37 by nweber            #+#    #+#             */
-/*   Updated: 2025/07/07 13:10:50 by nweber           ###   ########.fr       */
+/*   Created: 2025/07/05 10:41:17 by nweber            #+#    #+#             */
+/*   Updated: 2025/07/07 12:51:38 by nweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-// puts a char at file descriptor
-void	ft_putchar_fd(char c, int fd)
+// goes trough the list and itterates over its content with the function f
+void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
-	write(fd, &c, 1);
+	if (!lst || !f)
+		return ;
+	while (lst)
+	{
+		f(lst->content);
+		lst = lst->next;
+	}
 }

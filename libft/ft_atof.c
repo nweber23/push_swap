@@ -1,25 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atol.c                                          :+:      :+:    :+:   */
+/*   ft_atof.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nweber <nweber@student.42Heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/06 09:27:49 by nweber            #+#    #+#             */
-/*   Updated: 2025/08/06 09:28:27 by nweber           ###   ########.fr       */
+/*   Created: 2025/07/23 22:28:38 by nweber            #+#    #+#             */
+/*   Updated: 2025/07/23 22:28:44 by nweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-long	ft_atol(const char *str)
+static double	handle_decimal(const char *str, double result, int sign)
 {
-	long	result;
+	double	fraction;
+
+	fraction = 0.1;
+	while (*str >= '0' && *str <= '9')
+	{
+		result += (*str - '0') * fraction * sign;
+		fraction *= 0.1;
+		str++;
+	}
+	return (result);
+}
+
+double	ft_atof(const char *str)
+{
+	double	result;
 	int		sign;
 
 	result = 0;
 	sign = 1;
-	while (*str == ' ' || (*str >= 9 && *str <= 13))
+	while (*str == ' ' || (*str >= '\t' && *str <= '\r'))
 		str++;
 	if (*str == '-' || *str == '+')
 	{
@@ -29,8 +41,10 @@ long	ft_atol(const char *str)
 	}
 	while (*str >= '0' && *str <= '9')
 	{
-		result = result * 10 + (*str - '0');
+		result = result * 10 + (*str - '0') * sign;
 		str++;
 	}
-	return (result * sign);
+	if (*str == '.')
+		result = handle_decimal(str + 1, result, sign);
+	return (result);
 }
