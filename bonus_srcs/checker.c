@@ -6,7 +6,7 @@
 /*   By: nweber <nweber@student.42Heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 10:36:09 by nweber            #+#    #+#             */
-/*   Updated: 2025/08/06 12:35:47 by nweber           ###   ########.fr       */
+/*   Updated: 2025/08/06 13:10:42 by nweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static int	execution(t_stack *stack_a, t_stack *stack_b, char *command)
 		swap(stack_a);
 	else if (!ft_strcmp(command, "sb\n"))
 		swap(stack_b);
-	else if (!ft_strchr(command, "ss\n"))
+	else if (!ft_strcmp(command, "ss\n"))
 		ss(stack_a, stack_b);
 	else
 		return (0);
@@ -87,7 +87,7 @@ int	main(int argc, char **argv)
 		error_exit("Error\n");
 	count = get_numbers(argc, argv);
 	numbers = parse_args(argc, argv, count);
-	if (count <= 1 || check_duplicates_bf(numbers, count))
+	if (count <= 1 || is_duplicate(numbers, count))
 	{
 		free(numbers);
 		if (count == 1)
