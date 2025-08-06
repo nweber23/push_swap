@@ -6,7 +6,7 @@
 /*   By: nweber <nweber@student.42Heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 10:59:07 by nweber            #+#    #+#             */
-/*   Updated: 2025/08/06 11:04:02 by nweber           ###   ########.fr       */
+/*   Updated: 2025/08/06 11:29:44 by nweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,4 +102,31 @@ int	*parse_args(int argc, char **argv, int len)
 		ft_array_free(str);
 	}
 	return (nums);
+}
+
+int	ft_fgets(char **line)
+{
+	char	*buffer;
+	char	input;
+	int		i;
+	int		count;
+
+	i = 0;
+	buffer = (char *)malloc(BUFFER_SIZE);
+	if (!buffer)
+		return (-1);
+	count = read(0, &input, 1);
+	while (count && input != '\n' && input != '\0')
+	{
+		if (input != '\n' && input != '\0')
+			buffer[i] = input;
+		i++;
+		count = read(0, &input, 1);
+	}
+	buffer[i] = '\n';
+	i++;
+	buffer[i] = '\0';
+	*line = ft_strdup(buffer);
+	free(buffer);
+	return (i);
 }
