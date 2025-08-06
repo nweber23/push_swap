@@ -6,22 +6,24 @@
 /*   By: nweber <nweber@student.42Heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 22:15:54 by nweber            #+#    #+#             */
-/*   Updated: 2025/07/27 15:37:02 by nweber           ###   ########.fr       */
+/*   Updated: 2025/08/06 11:08:35 by nweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-static int index_of(int n, int *arr, int len)
+static int	index_of(int n, int *arr, int len)
 {
-	int i = 0;
+	int	i;
+
+	i = 0;
 	while (i < len)
 	{
 		if (arr[i] == n)
-			return i;
+			return (i);
 		i++;
 	}
-	return -1;
+	return (-1);
 }
 
 static void	init_stack(t_stack *stack_a, t_stack *stack_b, int *nums, int c)

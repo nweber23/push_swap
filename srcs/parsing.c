@@ -6,7 +6,7 @@
 /*   By: nweber <nweber@student.42Heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 20:34:15 by nweber            #+#    #+#             */
-/*   Updated: 2025/08/06 09:27:40 by nweber           ###   ########.fr       */
+/*   Updated: 2025/08/06 11:07:43 by nweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int	*parse_args(int argc, char **argv, int len)
 		return (NULL);
 	i = 0;
 	j = 0;
-	while(++i < argc)
+	while (++i < argc)
 	{
 		str = ft_split(argv[i], ' ');
 		if (!str)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niklas-weber <niklas-weber@student.42.f    +#+  +:+       +#+        */
+/*   By: nweber <nweber@student.42Heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 19:06:51 by nweber            #+#    #+#             */
-/*   Updated: 2025/07/20 18:15:55 by niklas-webe      ###   ########.fr       */
+/*   Updated: 2025/08/06 11:05:25 by nweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ typedef struct s_stack
 
 // Main
 
-int	main(int argc, char **argv);
+int		main(int argc, char **argv);
 
 // Operations
 void	swap(t_stack *stack, char c, bool print);
