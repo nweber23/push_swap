@@ -6,7 +6,7 @@
 /*   By: nweber <nweber@student.42Heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 12:48:40 by nweber            #+#    #+#             */
-/*   Updated: 2025/08/06 09:28:37 by nweber           ###   ########.fr       */
+/*   Updated: 2025/08/06 09:59:08 by nweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <unistd.h>
 # include <stddef.h>
 # include "printf/includes/ft_printf.h"
+# include "get_next_line/get_next_line.h"
 
 typedef struct s_list
 {
