@@ -6,7 +6,7 @@
 /*   By: nweber <nweber@student.42Heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 20:41:23 by nweber            #+#    #+#             */
-/*   Updated: 2025/07/21 18:58:38 by nweber           ###   ########.fr       */
+/*   Updated: 2025/08/11 15:47:32 by nweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	sort(t_stack *stack_a, t_stack *stack_b, int *numbers, int length)
 	{
 		free(numbers);
 		free_stack(stack_a);
-		error_exit("");
+		exit(EXIT_SUCCESS);
 	}
 	else if (length == 2)
 		swap(stack_a, 'a', true);

@@ -6,7 +6,7 @@
 /*   By: nweber <nweber@student.42Heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 10:36:09 by nweber            #+#    #+#             */
-/*   Updated: 2025/08/06 13:20:16 by nweber           ###   ########.fr       */
+/*   Updated: 2025/08/11 15:49:53 by nweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,13 @@ static void	get_instructions(t_stack *stack_a, t_stack *stack_b)
 	char	*line;
 	int		result;
 
-	while ((result = ft_fgets(&line)) > 0)
+	result = ft_fgets(&line);
+	while (result > 0)
 	{
 		if (ft_strncmp(line, "\n", 1) == 0)
 		{
 			free(line);
-			break;
+			break ;
 		}
 		if (!execution(stack_a, stack_b, line))
 		{
@@ -75,7 +76,10 @@ static void	get_instructions(t_stack *stack_a, t_stack *stack_b)
 			error_exit("Error\n");
 		}
 		free(line);
+		result = ft_fgets(&line);
 	}
+	if (line)
+		free(line);
 	if (check_sort(stack_a) && stack_b->size == 0)
 		write(1, "OK\n", 3);
 	else

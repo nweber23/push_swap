@@ -6,7 +6,7 @@
 /*   By: nweber <nweber@student.42Heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 22:15:54 by nweber            #+#    #+#             */
-/*   Updated: 2025/08/06 11:08:35 by nweber           ###   ########.fr       */
+/*   Updated: 2025/08/11 15:49:17 by nweber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	main(int argc, char **argv)
 	{
 		free(numbers);
 		if (count == 1)
-			error_exit("Error\n");
+			exit(EXIT_SUCCESS);
 		error_exit("Error\n");
 	}
 	init_stack(&a, &b, numbers, count);
