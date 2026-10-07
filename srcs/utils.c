@@ -49,27 +49,20 @@ void	error_exit(char *message)
 	exit(EXIT_FAILURE);
 }
 
-void	sort(t_stack *stack_a, t_stack *stack_b, int *numbers, int length)
+void	rotate_to_min(t_stack *stack, int size)
 {
-	if (check_sort(stack_a))
+	int	min_i;
+	int	r;
+
+	min_i = get_min_i(stack);
+	r = count_r(stack->head, min_i);
+	while (stack->head->s_index != min_i)
 	{
-		free(numbers);
-		free_stack(stack_a);
-		exit(EXIT_SUCCESS);
+		if (r <= size - r)
+			rotate(stack, 'a', true);
+		else
+			reverse_rotate(stack, 'a', true);
 	}
-	else if (length == 2)
-		swap(stack_a, 'a', true);
-	else if (length == 3)
-		small_sort(stack_a, length);
-	else if (length <= 7)
-		minimal_sort(stack_a, stack_b, length);
-	else if (length > 7)
-	{
-		sort1(stack_a, stack_b, length);
-		sort2(stack_a, stack_b, length);
-	}
-	else
-		error_exit("COULDNT SORT");
 }
 
 void	insertion_sort(int *nums, int n)

@@ -61,7 +61,6 @@ void	small_sort(t_stack *stack, int len)
 
 void	minimal_sort(t_stack *stack_a, t_stack *stack_b, int len)
 {
-	int	min_i;
 	int	i;
 	int	n;
 
@@ -69,14 +68,7 @@ void	minimal_sort(t_stack *stack_a, t_stack *stack_b, int len)
 	n = len;
 	while (i++ < n - 3)
 	{
-		min_i = get_min_i(stack_a);
-		if (count_r(stack_a->head, min_i) <= n - min_i - \
-				count_r(stack_a->head, min_i))
-			while (stack_a->head->s_index != min_i)
-				rotate(stack_a, 'a', true);
-		else
-			while (stack_a->head->s_index != min_i)
-				reverse_rotate(stack_a, 'a', true);
+		rotate_to_min(stack_a, len);
 		if (check_sort(stack_a) && stack_b->size == 0)
 			return ;
 		push(stack_b, stack_a, 'b', true);
