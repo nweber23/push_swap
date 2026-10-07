@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CHECKER_H
-# define CHECKER_H
+#ifndef CHECKER_BONUS_H
+# define CHECKER_BONUS_H
 
 # include "../libft/libft.h"
 # include <stdlib.h>
@@ -50,9 +50,6 @@ void	rr(t_stack *stack_a, t_stack *stack_b);
 void	rrr(t_stack *stack_a, t_stack *stack_b);
 
 // Parsing
-int		get_numbers(int argc, char **argv);
-void	check_numbers(char **str, int *nums);
-int		is_duplicate(int *nums, int len);
-int		*parse_args(int argc, char **argv, int count);
+int		*parse_args(int argc, char **argv, int *count);
 
 #endif
