@@ -1,13 +1,15 @@
 NAME = push_swap
 BONUS_NAME = checker
-SRC = srcs/push_swap.c srcs/logic.c srcs/parsing.c srcs/utils.c srcs/operations.c srcs/stack_utils.c
-BONUS_SRC = bonus_srcs/checker.c bonus_srcs/operations.c bonus_srcs/operations_utils.c bonus_srcs/parsing.c bonus_srcs/utils.c
+SRC = srcs/push_swap.c srcs/logic.c srcs/parsing.c srcs/utils.c srcs/operations.c srcs/stack_utils.c srcs/sort.c
+BONUS_SRC = bonus_srcs/checker_bonus.c bonus_srcs/operations_bonus.c \
+	bonus_srcs/operations_utils_bonus.c bonus_srcs/parsing_bonus.c \
+	bonus_srcs/utils_bonus.c bonus_srcs/input_bonus.c
 OBJ_DIR = objs
 BONUS_OBJ_DIR = bonus_objs
 OBJ = $(SRC:srcs/%.c=$(OBJ_DIR)/%.o)
 BONUS_OBJ = $(BONUS_SRC:bonus_srcs/%.c=$(BONUS_OBJ_DIR)/%.o)
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -I./includes/ -I./libft/includes/
+CFLAGS = -Wall -Wextra -Werror -I./includes/
 
 # Library paths
 LIBFT_DIR = ./libft
@@ -32,7 +34,6 @@ $(BONUS_OBJ_DIR)/%.o: bonus_srcs/%.c includes/*.h
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(LIBFT):
-	$(MAKE) fclean -C $(LIBFT_DIR)
 	$(MAKE) -C $(LIBFT_DIR)
 
 clean:
@@ -45,8 +46,7 @@ fclean: clean
 	rm -f $(BONUS_NAME)
 	$(MAKE) fclean -C $(LIBFT_DIR)
 
-re:
-	$(MAKE) fclean
+re: fclean
 	$(MAKE) all
 
 .PHONY: all bonus clean fclean re
