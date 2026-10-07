@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   checker.c                                          :+:      :+:    :+:   */
+/*   checker_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nweber <nweber@student.42Heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "checker.h"
+#include "checker_bonus.h"
 
 static int	execution(t_stack *stack_a, t_stack *stack_b, char *command)
 {
@@ -57,7 +57,14 @@ static void	init_stack(t_stack *stack_a, t_stack *stack_b, int *nums, int count)
 	}
 }
 
-static void	get_instructions(t_stack *stack_a, t_stack *stack_b)
+static void	cleanup(t_stack *a, t_stack *b, int *nums)
+{
+	free(nums);
+	free_stack(a);
+	free_stack(b);
+}
+
+static int	get_instructions(t_stack *stack_a, t_stack *stack_b)
 {
 	char	*line;
 	int		result;
@@ -65,25 +72,16 @@ static void	get_instructions(t_stack *stack_a, t_stack *stack_b)
 	result = ft_fgets(&line);
 	while (result > 0)
 	{
-		if (ft_strncmp(line, "\n", 1) == 0)
-		{
-			free(line);
-			break ;
-		}
 		if (!execution(stack_a, stack_b, line))
 		{
 			free(line);
-			error_exit("Error\n");
+			return (0);
 		}
 		free(line);
 		result = ft_fgets(&line);
 	}
-	if (line)
-		free(line);
-	if (check_sort(stack_a) && stack_b->size == 0)
-		write(1, "OK\n", 3);
-	else
-		write(1, "KO\n", 3);
+	free(line);
+	return (result == 0);
 }
 
 int	main(int argc, char **argv)
@@ -92,21 +90,19 @@ int	main(int argc, char **argv)
 	t_stack	stack_b;
 	int		count;
 	int		*numbers;
+	int		valid;
 
 	if (argc == 1)
-		error_exit("Error\n");
-	count = get_numbers(argc, argv);
-	numbers = parse_args(argc, argv, count);
-	if (count <= 1 || is_duplicate(numbers, count))
-	{
-		free(numbers);
-		if (count == 1)
-			error_exit("Error\n");
-		error_exit("Error\n");
-	}
+		return (0);
+	numbers = parse_args(argc, argv, &count);
 	init_stack(&stack_a, &stack_b, numbers, count);
-	get_instructions(&stack_a, &stack_b);
-	free(numbers);
-	free_stack(&stack_a);
-	free_stack(&stack_b);
+	valid = get_instructions(&stack_a, &stack_b);
+	if (!valid)
+		write(2, "Error\n", 6);
+	else if (check_sort(&stack_a) && stack_b.size == 0)
+		write(1, "OK\n", 3);
+	else
+		write(1, "KO\n", 3);
+	cleanup(&stack_a, &stack_b, numbers);
+	return (!valid);
 }
