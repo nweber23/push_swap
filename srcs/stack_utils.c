@@ -14,7 +14,7 @@
 
 void	free_stack(t_stack *stack)
 {
-	while (stack)
+	while (stack->head)
 		pop_stack(stack);
 }
 
@@ -52,7 +52,7 @@ int	check_sort(t_stack *stack)
 	t_node	*temp;
 
 	temp = stack->head;
-	while (temp->next)
+	while (temp && temp->next)
 	{
 		if (temp->value > temp->next->value)
 			return (0);

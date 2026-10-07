@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   utils_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nweber <nweber@student.42Heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "checker.h"
+#include "checker_bonus.h"
 
 void	error_exit(char *message)
 {
@@ -20,7 +20,7 @@ void	error_exit(char *message)
 
 void	free_stack(t_stack *stack)
 {
-	while (stack)
+	while (stack->head)
 		pop_stack(stack);
 }
 
@@ -58,7 +58,7 @@ int	check_sort(t_stack *stack)
 	t_node	*temp;
 
 	temp = stack->head;
-	while (temp->next)
+	while (temp && temp->next)
 	{
 		if (temp->value > temp->next->value)
 			return (0);
