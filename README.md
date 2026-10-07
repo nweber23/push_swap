@@ -1,230 +1,71 @@
+*This project has been created as part of the 42 curriculum by nweber.*
+
 # push_swap
-A highly efficient sorting algorithm implementation using only stack operations, developed as part of the 42 School curriculum.
 
-## Overview
-This project implements a sorting algorithm using two stacks and a limited set of operations. The goal is to sort a list of integers in ascending order using the minimum number of operations possible. The program demonstrates algorithm optimization, data structure manipulation, and complexity analysis in C.
+## Description
 
-## Features
-### Core Functionality
-- Sorts integers using only two stacks (A and B)
-- Implements 11 specific stack operations (push, pop, swap, rotate)
-- Optimized algorithms for different input sizes
-- Outputs the sequence of operations needed to sort
-- Handles edge cases and error conditions gracefully
+`push_swap` sorts a stack of unique integers using a second stack and a fixed set of 11 instructions (`sa sb ss pa pb ra rb rr rra rrb rrr`), printing the instruction list to stdout. The goal is to sort with as few instructions as possible.
 
-### Bonus Features
-- **Checker Program**: Validates if a sequence of operations correctly sorts the stack
-- **Interactive Verification**: Reads operations from stdin and verifies the result
-- **Complete Validation**: Checks both correctness and final stack state
+The optional `checker` program (bonus) reads instructions from stdin, applies them to the given stack and prints `OK` or `KO`.
 
-### Algorithm Optimization
-- **Small Lists (≤3)**: Direct sorting with minimal operations
-- **Medium Lists (4-7)**: Optimized minimal sorting algorithm
-- **Large Lists (>7)**: Advanced partitioning with LIS-based optimization
-- **Complexity Target**: Achieves excellent performance benchmarks
+### Algorithm
 
-## Project Structure
-```
-.
-├── Makefile                     # Build configuration
-├── includes/
-│   ├── push_swap.h              # Main header file
-│   └── checker.h                # Checker program header
-├── srcs/                        # Core implementation
-│   ├── push_swap.c              # Main program logic
-│   ├── logic.c                  # Sorting algorithms
-│   ├── operations.c             # Stack operations
-│   ├── parsing.c                # Input validation and parsing
-│   ├── stack_utils.c            # Stack manipulation utilities
-│   └── utils.c                  # General utilities
-├── bonus_srcs/                  # Bonus implementation
-│   ├── checker.c                # Main checker logic
-│   ├── operations.c             # Checker stack operations
-│   ├── operations_utils.c       # Combined operations
-│   ├── parsing.c                # Input parsing for checker
-│   └── utils.c                  # Checker utilities
-└── libft/                       # Custom C library (external)
-```
+| Size | Strategy |
+|------|----------|
+| sorted / 0-1 elements | nothing printed |
+| 2 | `sa` |
+| 3 | hard-coded case analysis (≤ 2 operations) |
+| 4-7 | selection sort: push the smallest element to `b` (rotating the cheaper way), sort the last 3, push everything back |
+| 8+ | **chunked push to `b`**: values are replaced by their sorted index; indices within a sliding window (`sqrt(n) * 1.4`) are pushed to `b`, small ones are rotated to the bottom of `b`, the rest of `a` is rotated. Then the largest remaining element is repeatedly brought to the top of `b` (`rb` or `rrb`, whichever is shorter) and pushed back with `pa` |
 
-## Compilation
-### Prerequisites
-- GCC or compatible C compiler
-- Make build system
-- Custom libft library (included)
+Measured over random inputs: 100 numbers ≈ 580 operations (worst seen 629), 500 numbers ≈ 5070 operations (worst seen 5345).
 
-### Build Commands
+### Error handling
+
+`Error\n` on stderr (exit code 1) for: non-integers, values outside `int` range, duplicates, empty-string arguments, stray signs (`-`, `--1`, `1-2`). Arguments can be given separately (`1 2 3`) or quoted (`"1 2 3"`) or mixed. A leading `+`/`-` sign is accepted, as are leading zeros.
+
+## Instructions
+
 ```bash
-# Main program
-make
-
-# Checker program
-make bonus
-
-# Build both programs
-make all bonus
-
-# Clean object files
-make clean
-
-# Full cleanup
-make fclean
-
-# Rebuild everything
-make re
+make          # builds push_swap
+make bonus    # builds checker
+make clean | fclean | re
 ```
 
-## Usage
-### Basic Usage (Sorting)
 ```bash
-# Sort a list of integers
-./push_swap 3 1 4 1 5 9 2 6
-
-# Sort with quoted arguments
-./push_swap "3 1 4" "1 5" "9 2 6"
-
-# Mixed argument formats
-./push_swap 42 "21 84" 168
-
-# Example output:
-pb
-ra
-pb
-ra
-pb
-sa
-pa
-pa
-pa
+./push_swap 2 1 3 6 5 8
+ARG="4 67 3 87 23"; ./push_swap $ARG | wc -l
+ARG="4 67 3 87 23"; ./push_swap $ARG | ./checker $ARG     # OK
+./checker 3 2 1 0                                          # then type instructions, one per line, Ctrl+D
 ```
 
-### Bonus Usage (Checker)
+Checker behaviour: no argument → no output; every instruction must end with `\n`; unknown / malformed instruction, blank line or invalid argument → `Error` on stderr; otherwise `OK` (sorted and `b` empty) or `KO` on stdout.
+
+Quick benchmark:
+
 ```bash
-# Verify a sequence of operations
-./push_swap 3 1 2 | ./checker 3 1 2
-# Output: OK
-
-# Manual verification
-./checker 3 1 2
-sa
-rra
-# Press Ctrl+D
-# Output: OK
-
-# Check invalid sequence
-echo -e "sa\nrra\npb" | ./checker 3 1 2
-# Output: KO
+ARG=$(shuf -i 1-10000 -n 500 | tr '\n' ' '); ./push_swap $ARG | wc -l
+ARG=$(shuf -i 1-10000 -n 500 | tr '\n' ' '); ./push_swap $ARG | ./checker $ARG
 ```
 
-## Stack Operations
-### Single Stack Operations
-- **sa/sb**: Swap the first two elements of stack A/B
-- **ra/rb**: Rotate stack A/B (move top element to bottom)
-- **rra/rrb**: Reverse rotate stack A/B (move bottom element to top)
+## Project structure
 
-### Dual Stack Operations
-- **ss**: Execute sa and sb simultaneously
-- **rr**: Execute ra and rb simultaneously  
-- **rrr**: Execute rra and rrb simultaneously
-- **pa/pb**: Push top element from B to A / A to B
-
-## Algorithm Details
-### Sorting Strategies
-```bash
-# 2 elements: 1 operation maximum
-./push_swap 2 1
-# Output: sa
-
-# 3 elements: 2-3 operations maximum
-./push_swap 3 2 1
-# Output: sa, rra
-
-# 4-7 elements: Minimal sorting algorithm
-./push_swap 5 3 1 4 2
-# Uses optimized small-scale sorting
-
-# 8+ elements: Advanced partitioning
-./push_swap 8 3 5 1 9 2 7 4 6
-# Uses chunk-based sorting with rotation optimization
+```
+Makefile
+includes/   push_swap.h  checker_bonus.h
+srcs/       push_swap.c (main) parsing.c sort.c logic.c utils.c operations.c stack_utils.c
+bonus_srcs/ checker_bonus.c input_bonus.c parsing_bonus.c operations_bonus.c operations_utils_bonus.c utils_bonus.c
+libft/      libft (used for ft_split, ft_isdigit, ft_sqrt, ...)
 ```
 
-### Performance Benchmarks
-- **3 elements**: ≤ 3 operations
-- **5 elements**: ≤ 12 operations
-- **100 elements**: ≤ 700 operations (target: ~550)
-- **500 elements**: ≤ 5500 operations (target: ~5000)
+## Resources
 
-## Implementation Details
-- **Memory Management**: Zero memory leaks with proper cleanup
-- **Input Validation**: Comprehensive error checking for duplicates and invalid input
-- **Integer Indexing**: Uses sorted indices for optimization
-- **Rotation Optimization**: Calculates optimal rotation direction
-- **Standards Compliance**: Follows 42 School coding standards (Norminette)
+- 42 subject: *push_swap* (v10.1)
+- [Push_swap: the least amount of moves with two stacks (Medium)](https://medium.com/@jamierobertdawson/push-swap-the-least-amount-of-moves-with-two-stacks-d1e76a71789a)
+- [Sorting algorithm complexity - Big-O cheat sheet](https://www.bigocheatsheet.com/)
+- [Insertion sort / selection sort - Wikipedia](https://en.wikipedia.org/wiki/Sorting_algorithm)
+- `valgrind`, `norminette` for leak and norm checks
 
-## Error Handling
-```bash
-# Duplicate numbers
-./push_swap 1 2 3 2
-# Output: Error
+### Use of AI
 
-# Invalid input
-./push_swap 1 2 abc
-# Output: Error
-
-# Integer overflow
-./push_swap 2147483648
-# Output: Error
-
-# Empty input
-./push_swap
-# No output, exits successfully
-
-# Single number
-./push_swap 42
-# No output (already sorted)
-```
-
-## Advanced Features
-### Checker Program Validation
-- Reads operations from standard input
-- Executes operations on the provided stack
-- Outputs "OK" if final state is sorted with empty stack B
-- Outputs "KO" if operations are invalid or result is incorrect
-- Handles malformed operation names gracefully
-
-### Input Format Support
-- **Space-separated**: `./push_swap 1 2 3`
-- **Quoted groups**: `./push_swap "1 2" "3"`
-- **Mixed formats**: `./push_swap 1 "2 3"`
-- **Negative numbers**: `./push_swap -1 0 1`
-
-## Performance Analysis
-### Time Complexity
-- **Best Case**: O(n) for already sorted input
-- **Average Case**: O(n log n) for random input
-- **Worst Case**: O(n²) for reverse sorted input
-
-### Space Complexity
-- **Stack Memory**: O(n) for input storage
-- **Operation Output**: O(n log n) operations generated
-
-## Testing Examples
-```bash
-# Generate random test
-ARG=$(seq 1 100 | shuf | tr '\n' ' '); ./push_swap $ARG | wc -l
-
-# Test with checker
-ARG="4 67 3 87 23"; ./push_swap $ARG | ./checker $ARG
-
-# Performance benchmark
-./push_swap $(seq 1 500 | shuf | tr '\n' ' ') | wc -l
-```
-
-## Technical Specifications
-- **Integer Range**: Handles full 32-bit signed integer range
-- **Input Limit**: No artificial limit on number of elements
-- **Operation Limit**: Optimized for competitive benchmarks
-- **Memory Usage**: Efficient stack-based implementation
-- **Error Codes**: Standard exit codes for different error types
-
-## Author
-**nweber** - 42 Heilbronn Student
+AI (Claude Code) was used to review the finished project, find edge-case bugs (parsing, error codes, a double free in the checker, memory handling), write throw-away test scripts (exhaustive permutation tests for n ≤ 8, random benchmarks, valgrind runs), rename the bonus files to the `_bonus` convention and draft this README. The sorting algorithm itself was designed and written by the author; all AI-suggested changes were read, compiled and tested before being kept.
