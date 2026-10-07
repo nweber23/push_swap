@@ -46,6 +46,7 @@ void	reverse_rotate(t_stack *stack, char c, bool print);
 int		check_sort(t_stack *stack);
 int		count_r(t_node *stack, int i);
 int		get_min_i(t_stack *stack);
+void	rotate_to_min(t_stack *stack, int size);
 void	push_stack(t_stack *stack, int value, int s_index);
 int		pop_stack(t_stack *stack);
 void	free_stack(t_stack *stack);
@@ -56,15 +57,13 @@ void	sort2(t_stack *stack_a, t_stack *stack_b, int length);
 void	small_sort(t_stack *stack, int len);
 int		single_rotation(t_stack *stack, int i);
 void	minimal_sort(t_stack *stack_a, t_stack *stack_b, int len);
-void	sort(t_stack *stack_a, t_stack *stack_b, int *numbers, int length);
+void	sort(t_stack *stack_a, t_stack *stack_b, int length);
 void	insertion_sort(int *nums, int n);
 
 // Error handling
 void	error_exit(char *message);
 
 // Parsing
-int		*parse_args(int argc, char **argv, int len);
-int		get_numbers(int argc, char **argv);
-int		is_duplicate(int *numbers, int len);
+int		*parse_args(int argc, char **argv, int *count);
 
 #endif

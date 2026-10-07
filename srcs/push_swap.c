@@ -55,19 +55,12 @@ int	main(int argc, char **argv)
 	int		*numbers;
 
 	if (argc == 1)
-		error_exit("");
-	count = get_numbers(argc, argv);
-	numbers = parse_args(argc, argv, count);
-	if (count <= 1 || is_duplicate(numbers, count))
-	{
-		free(numbers);
-		if (count == 1)
-			exit(EXIT_SUCCESS);
-		error_exit("Error\n");
-	}
+		return (0);
+	numbers = parse_args(argc, argv, &count);
 	init_stack(&a, &b, numbers, count);
-	sort(&a, &b, numbers, count);
+	sort(&a, &b, count);
 	free(numbers);
 	free_stack(&a);
+	free_stack(&b);
 	return (0);
 }

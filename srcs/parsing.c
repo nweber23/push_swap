@@ -12,52 +12,60 @@
 
 #include "../includes/push_swap.h"
 
-int	get_numbers(int argc, char **argv)
+static int	parse_int(const char *s, int *out)
 {
-	int	i;
-	int	j;
-	int	count;
+	long	n;
+	int		sign;
 
-	i = 1;
-	count = 0;
-	while (i < argc)
+	sign = 1;
+	if (*s == '-' || *s == '+')
 	{
-		j = 0;
-		while (argv[i][j])
-		{
-			if (!ft_isdigit(argv[i][j]) && argv[i][j] != ' '
-					&& argv[i][j] != '-')
-				return (-1);
-			if (ft_isdigit(argv[i][j]) && (argv[i][j + 1] == ' '
-					|| argv[i][j + 1] == '\0'))
-				count++;
-			j++;
-		}
-		i++;
+		if (*s == '-')
+			sign = -1;
+		s++;
+	}
+	if (!ft_isdigit(*s))
+		return (0);
+	n = 0;
+	while (ft_isdigit(*s))
+	{
+		n = n * 10 + (*s++ - '0');
+		if (n > (long)INT_MAX + 1)
+			return (0);
+	}
+	n *= sign;
+	if (*s || n > INT_MAX || n < INT_MIN)
+		return (0);
+	*out = (int)n;
+	return (1);
+}
+
+static int	count_tokens(int argc, char **argv)
+{
+	char	**words;
+	int		i;
+	int		w;
+	int		count;
+
+	count = 0;
+	i = 0;
+	while (++i < argc)
+	{
+		words = ft_split(argv[i], ' ');
+		if (!words)
+			return (-1);
+		w = 0;
+		while (words[w])
+			w++;
+		ft_array_free(words);
+		if (w == 0)
+			return (-1);
+		count += w;
 	}
 	return (count);
 }
 
-void	check_numbers(char **str, int *nums)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		if (ft_atol(str[i]) > INT_MAX \
-			|| ft_atol(str[i]) < INT_MIN \
-			|| ft_strlen(str[i]) > 11)
-		{
-			ft_array_free(str);
-			free(nums);
-			error_exit("Error\n");
-		}
-		i++;
-	}
-}
-
-int	is_duplicate(int *nums, int len)
+static int	is_duplicate(int *nums, int len)
 {
 	int	i;
 	int	j;
@@ -77,29 +85,48 @@ int	is_duplicate(int *nums, int len)
 	return (0);
 }
 
-int	*parse_args(int argc, char **argv, int len)
+static int	fill_numbers(int argc, char **argv, int *nums)
 {
-	char	**str;
-	int		*nums;
+	char	**words;
 	int		i;
+	int		w;
 	int		j;
-	int		temp;
 
-	nums = (int *)malloc(sizeof(int) * len);
-	if (!nums)
-		return (NULL);
 	i = 0;
 	j = 0;
 	while (++i < argc)
 	{
-		str = ft_split(argv[i], ' ');
-		if (!str)
-			error_exit("Error\n");
-		check_numbers(str, nums);
-		temp = 0;
-		while (str[temp])
-			nums[j++] = ft_atoi(str[temp++]);
-		ft_array_free(str);
+		words = ft_split(argv[i], ' ');
+		if (!words)
+			return (0);
+		w = 0;
+		while (words[w] && parse_int(words[w], &nums[j]))
+		{
+			w++;
+			j++;
+		}
+		w = (words[w] == NULL);
+		ft_array_free(words);
+		if (!w)
+			return (0);
+	}
+	return (1);
+}
+
+int	*parse_args(int argc, char **argv, int *count)
+{
+	int	*nums;
+
+	*count = count_tokens(argc, argv);
+	if (*count < 0)
+		error_exit("Error\n");
+	nums = (int *)malloc(sizeof(int) * *count);
+	if (!nums)
+		error_exit("Error\n");
+	if (!fill_numbers(argc, argv, nums) || is_duplicate(nums, *count))
+	{
+		free(nums);
+		error_exit("Error\n");
 	}
 	return (nums);
 }
